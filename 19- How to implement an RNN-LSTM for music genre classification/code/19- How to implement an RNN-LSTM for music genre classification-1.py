@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 
 DATA_PATH = "18-08-2020_dataset.json"
 SAVED_MODEL_PATH = '18-08-2020.h7'
-EPOCH = 1
-LEARNING_RATE = 0.0001
+EPOCH = 300
+LEARNING_RATE = 0.0005
 
 def load_data(data_path):
     """Loads training dataset from json file.
