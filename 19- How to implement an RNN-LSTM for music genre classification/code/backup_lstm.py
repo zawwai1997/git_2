@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 import tensorflow.keras as keras
 import matplotlib.pyplot as plt
 
-DATA_PATH = "ok_output.json"
+DATA_PATH = "18-08-2020_dataset.json"
 
 
 def load_data(data_path):

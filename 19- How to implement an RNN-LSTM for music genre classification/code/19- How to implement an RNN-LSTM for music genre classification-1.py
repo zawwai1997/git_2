@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 DATA_PATH = "18-08-2020_dataset.json"
 SAVED_MODEL_PATH = '18-08-2020.h7'
-EPOCH = 5
+EPOCH = 1
 LEARNING_RATE = 0.0001
 
 def load_data(data_path):
@@ -28,26 +28,26 @@ def load_data(data_path):
 def plot_history(history):
     """Plots accuracy/loss for training/validation set as a function of the epochs
 
-    :param history: Training history of model
-    :return:
+        :param history: Training history of model
+        :return:
     """
 
     fig, axs = plt.subplots(2)
 
-    # create accuracy subplot
-    axs[0].plot(history.history["accuracy"], label="accuracy")
-    axs[0].plot(history.history['val_accuracy'], label="val_accuracy")
+    # create accuracy sublpot
+    axs[0].plot(history.history["acc"], label="train accuracy")
+    axs[0].plot(history.history["val_acc"], label="test accuracy")
     axs[0].set_ylabel("Accuracy")
     axs[0].legend(loc="lower right")
-    axs[0].set_title("Accuracy evaluation")
+    axs[0].set_title("Accuracy eval")
 
-    # create loss subplot
-    axs[1].plot(history.history["loss"], label="loss")
-    axs[1].plot(history.history['val_loss'], label="val_loss")
+    # create error sublpot
+    axs[1].plot(history.history["loss"], label="train error")
+    axs[1].plot(history.history["val_loss"], label="test error")
+    axs[1].set_ylabel("Error")
     axs[1].set_xlabel("Epoch")
-    axs[1].set_ylabel("Loss")
     axs[1].legend(loc="upper right")
-    axs[1].set_title("Loss evaluation")
+    axs[1].set_title("Error eval")
 
     plt.show()
 
@@ -113,12 +113,13 @@ if __name__ == "__main__":
     optimiser = keras.optimizers.Adam(learning_rate=LEARNING_RATE)
     model.compile(optimizer=optimiser,
                   loss='sparse_categorical_crossentropy',
-                  metrics=['accuracy'])
+                  metrics=['acc'])
 
     model.summary()
 
     # train model
     history = model.fit(X_train, y_train, validation_data=(X_validation, y_validation), batch_size=32, epochs=EPOCH)
+
     model.save(SAVED_MODEL_PATH)
     # plot accuracy/error for training and validation
     plot_history(history)
