@@ -48,6 +48,10 @@ def save_mfcc(dataset_path, json_path, num_mfcc=13, n_fft=2048, hop_length=512, 
 
 		# load audio file
                 file_path = os.path.join(dirpath, f)
+                sp = file_path.split(".")
+                if (sp.__len__() > 2):
+                    file_path = sp[0] + '.' + sp[2]
+
                 signal, sample_rate = librosa.load(file_path, sr=SAMPLE_RATE)
 
                 # process all segments of audio file
