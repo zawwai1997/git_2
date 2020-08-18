@@ -4,8 +4,10 @@ from sklearn.model_selection import train_test_split
 import tensorflow.keras as keras
 import matplotlib.pyplot as plt
 
-DATA_PATH = "../13/data_10.json"
-
+DATA_PATH = "ok_output.json"
+SAVED_MODEL_PATH = '18-08-2020.h7'
+EPOCH = 5
+LEARNING_RATE = 0.0001
 
 def load_data(data_path):
     """Loads training dataset from json file.
@@ -93,7 +95,7 @@ def build_model(input_shape):
     model.add(keras.layers.Dropout(0.3))
 
     # output layer
-    model.add(keras.layers.Dense(10, activation='softmax'))
+    model.add(keras.layers.Dense(32, activation='softmax'))
 
     return model
 
@@ -108,7 +110,7 @@ if __name__ == "__main__":
     model = build_model(input_shape)
 
     # compile model
-    optimiser = keras.optimizers.Adam(learning_rate=0.0001)
+    optimiser = keras.optimizers.Adam(learning_rate=LEARNING_RATE)
     model.compile(optimizer=optimiser,
                   loss='sparse_categorical_crossentropy',
                   metrics=['accuracy'])
@@ -116,8 +118,8 @@ if __name__ == "__main__":
     model.summary()
 
     # train model
-    history = model.fit(X_train, y_train, validation_data=(X_validation, y_validation), batch_size=32, epochs=30)
-
+    history = model.fit(X_train, y_train, validation_data=(X_validation, y_validation), batch_size=32, epochs=EPOCH)
+    model.save(SAVED_MODEL_PATH)
     # plot accuracy/error for training and validation
     plot_history(history)
 
