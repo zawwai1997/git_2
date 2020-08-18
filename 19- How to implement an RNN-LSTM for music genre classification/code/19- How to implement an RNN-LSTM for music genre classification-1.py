@@ -28,26 +28,26 @@ def load_data(data_path):
 def plot_history(history):
     """Plots accuracy/loss for training/validation set as a function of the epochs
 
-        :param history: Training history of model
-        :return:
+    :param history: Training history of model
+    :return:
     """
 
     fig, axs = plt.subplots(2)
 
-    # create accuracy sublpot
-    axs[0].plot(history.history["accuracy"], label="train accuracy")
-    axs[0].plot(history.history["val_accuracy"], label="test accuracy")
+    # create accuracy subplot
+    axs[0].plot(history.history["accuracy"], label="accuracy")
+    axs[0].plot(history.history['val_accuracy'], label="val_accuracy")
     axs[0].set_ylabel("Accuracy")
     axs[0].legend(loc="lower right")
-    axs[0].set_title("Accuracy eval")
+    axs[0].set_title("Accuracy evaluation")
 
-    # create error sublpot
-    axs[1].plot(history.history["loss"], label="train error")
-    axs[1].plot(history.history["val_loss"], label="test error")
-    axs[1].set_ylabel("Error")
+    # create loss subplot
+    axs[1].plot(history.history["loss"], label="loss")
+    axs[1].plot(history.history['val_loss'], label="val_loss")
     axs[1].set_xlabel("Epoch")
+    axs[1].set_ylabel("Loss")
     axs[1].legend(loc="upper right")
-    axs[1].set_title("Error eval")
+    axs[1].set_title("Loss evaluation")
 
     plt.show()
 
