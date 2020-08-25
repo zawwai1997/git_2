@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 DATA_PATH = "18-08-2020_dataset.json"
 SAVED_MODEL_PATH = '18-08-2020.h7'
-EPOCH = 300
+EPOCH = 1
 LEARNING_RATE = 0.0005
 
 def load_data(data_path):
@@ -49,6 +49,7 @@ def plot_history(history):
     axs[1].legend(loc="upper right")
     axs[1].set_title("Error eval")
 
+    plt.savefig('final_plot')
     plt.show()
 
 
